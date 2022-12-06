@@ -14,8 +14,6 @@ const Addbook = () => {
 
     return posts.filter((post) => {
       return Object.values(post).join(" ").toLowerCase().includes(query.toLowerCase());
-      // const postName = post.title.toLowerCase();
-      // return postName.includes(query);
     });
   };
   const filteredPosts = filterPosts(list, query);
@@ -45,7 +43,6 @@ const Addbook = () => {
     });
     setList(newList);
   }
-
   return (
     <div>
       <div className="maincontent">
@@ -90,7 +87,7 @@ const Addbook = () => {
           <tbody>
             {filteredPosts.map((data) => {
               return (
-                <tr key={data.key}>
+                <tr className="tableRow" key={data.key}>
                   {console.log(data)}
                   <td className="td_2">{data.title}</td>
                   <td className="td_2">{data.author}</td>

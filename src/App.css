@@ -30,6 +30,9 @@ tbody{
     text-align: center;
 }
 tr{
-    
+ 
     margin-top: 1rem;
+}
+.tableRow{
+    display: none;
 }
