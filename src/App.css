@@ -1,3 +1,11 @@
+/* navbar  */
+.navbar{
+    text-align: center;
+    background-color: #81D8DB;
+}
+
+
+
 .maincontent{
     display: flex;
     flex-direction: column;
@@ -19,7 +27,7 @@ button{
     justify-content: center;
     margin-top: 8rem;
     width: 100%;
-    margin-bottom: 20rem;
+    /* margin-bottom: 20rem; */
 }
 
 
@@ -36,3 +44,15 @@ tr{
 .tableRow{
     display: none;
 }
+.search_bar{
+    /* background-color: black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -4rem;
+    margin-top: 3rem;
+}
+/* .book-list{
+    display: none;
+} */

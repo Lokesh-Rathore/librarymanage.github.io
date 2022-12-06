@@ -1,5 +1,6 @@
 import React from "react";
 import initialList from "../bookslist";
+// import Search from "../search.js";
 import "./addbook.css";
 const Addbook = () => {
   const [list, setList] = React.useState(initialList);
@@ -7,18 +8,18 @@ const Addbook = () => {
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
 
-  const filterPosts = (posts, query) => {
+  const filterPosts = (post, query) => {
     if (!query) {
-      return posts;
+      return post;
     }
 
-    return posts.filter((post) => {
-      return Object.values(post).join(" ").toLowerCase().includes(query.toLowerCase());
+    return post.filter((post) => {
+      const postName = post.name.toLowerCase();
+      return postName.includes(query);
     });
   };
-  const filteredPosts = filterPosts(list, query);
-  console.log(filteredPosts);
 
+  const filteredPosts = filterPosts(list, query);
 
   var bookValue, authorValue, dateValue, subjectValue;
   const gettitleValue = (event) => {
@@ -43,6 +44,32 @@ const Addbook = () => {
     });
     setList(newList);
   }
+  window.onload = () => {
+
+    // var body = document.getElementById("body");
+    
+    function showBooks(){
+      var book_list = document.getElementsByClassName("book-list");
+      var str = 0;
+      window.onscroll = (e) => {
+        console.log(window.scrollY);
+        if (window.scrollY >= document.body.scrollHeight - window.innerHeight + 10)
+        {
+          viewbooks(str,book_list)
+          str += 5;
+        }
+      }
+    }
+    showBooks()
+  }
+  function viewbooks(str,book_list){
+    for(let i=str ; i< str+4 ; i++){
+      book_list[i].style.display = "table-row";
+    }
+    
+  }
+  
+
   return (
     <div>
       <div className="maincontent">
@@ -60,14 +87,14 @@ const Addbook = () => {
         </button>
       </div>
 
-      <form action="/" method="get">
+      <form action="/" method="get" className="search_bar">
         <label htmlFor="header-search">
-          <span className="visually-hidden">Search blog posts</span>
+          <span className="visually-hidden">Filter Here</span>
         </label>
         <input
           type="text"
           id="header-search"
-          placeholder="Search blog posts"
+          placeholder="Search..."
           name="s"
           onKeyUp={filterPosts}
         />
@@ -87,8 +114,7 @@ const Addbook = () => {
           <tbody>
             {filteredPosts.map((data) => {
               return (
-                <tr className="tableRow" key={data.key}>
-                  {console.log(data)}
+                <tr className="book-list" key={data.key}>
                   <td className="td_2">{data.title}</td>
                   <td className="td_2">{data.author}</td>
                   <td className="td_2">{data.subject}</td>
